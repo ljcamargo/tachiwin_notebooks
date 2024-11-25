@@ -20,7 +20,10 @@ Tachiwin is an open-source project developing Large Language Models (LLMs) for i
 - Unsloth
 - Llama 3.1 8B Instruct weights
 
-# Android Application "Tachiwin" Snapshot
+## Huggingface Collection of Datasets and Models
+- [Tachiwin Collection](https://huggingface.co/collections/ljcamargo/tachiwin-6744590779e7374b9c7e100d)
+
+## Android Application "Tachiwin" Snapshot
 Fully functional app to demonstrate the translation capabilities offline or online
 
 ## Features
