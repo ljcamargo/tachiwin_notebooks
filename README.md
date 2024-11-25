@@ -20,11 +20,8 @@ Tachiwin is an open-source project developing Large Language Models (LLMs) for i
 - Unsloth
 - Llama 3.1 8B Instruct weights
 
-## Quick Start
-1. Clone repository
-2. Install dependencies: `pip install -r requirements.txt`
-3. Configure model paths in notebooks
-4. Run notebooks sequentially
+# Android Application "Tachiwin" Snapshot
+Fully functional app to demonstrate the translation capabilities offline or online
 
 ## Features
 - Multilingual support (Tutunakú/Spanish/English)
