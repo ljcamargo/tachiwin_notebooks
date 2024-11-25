@@ -8,6 +8,11 @@ Tachiwin is an open-source project developing Large Language Models (LLMs) for i
 - Domain-specific fine-tuning for translation and linguistic tasks
 - Model deployment and inference pipeline
 
+## Google Colab Notebooks
+- [Pretraining Notebook](https://colab.research.google.com/drive/13sjOPEkUNH3Pp3r1b-oL9h3yP6UPBng9?usp=sharing)
+- [Finetuning Notebook](https://colab.research.google.com/drive/1r_ljgG71YhP7k6xYAM4U2OBVL1RUBB41?usp=sharing)
+- [Inference Notebook](https://colab.research.google.com/drive/1PhWdlVasxWDwI2kII8-lSLgzUGJthM16?usp=sharing)
+
 ## Requirements
 - Python 3.10+
 - PyTorch
