@@ -1,0 +1,498 @@
+[
+  {
+    "uid": "toes",
+    "name": "Diccionario Totonaco-Español",
+    "short_name": "Totonaco > Español",
+    "language1": {
+      "iso3": "tos",
+      "name": "Totonaco",
+      "demonym": "Tutunakú",
+      "variant": {
+        "uid": "general",
+        "name": "General",
+        "description": ""
+      },
+      "description": "",
+      "characters": [
+        "a",
+        "ch",
+        "e",
+        "i",
+        "j",
+        "k",
+        "kg",
+        "l",
+        "lh",
+        "m",
+        "n",
+        "o",
+        "p",
+        "s",
+        "t",
+        "tl",
+        "ts",
+        "u",
+        "w",
+        "x",
+        "y"
+      ]
+    },
+    "language2": {
+      "iso3": "spa",
+      "name": "Español",
+      "demonym": "Español",
+      "variant": {
+        "uid": "es_419",
+        "name": "Español de América Latina",
+        "demonym": "Español de América Latina",
+        "description": ""
+      },
+      "description": "",
+      "characters": [
+        "a",
+        "b",
+        "c",
+        "ch",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m",
+        "n",
+        "o",
+        "p",
+        "q",
+        "r",
+        "s",
+        "t",
+        "u",
+        "w",
+        "x",
+        "y",
+        "z"
+      ]
+    },
+    "entries": [],
+    "categories": [
+      {
+        "uid": "planta",
+        "name": "Planta",
+        "plural": "Plantas",
+        "description": ""
+      },
+      {
+        "uid": "animal",
+        "name": "Animal",
+        "plural": "Animales",
+        "description": ""
+      },
+      {
+        "uid": "alimento",
+        "name": "Alimento",
+        "plural": "Alimentos",
+        "description": ""
+      },
+      {
+        "uid": "color",
+        "name": "Color",
+        "plural": "Colores",
+        "description": ""
+      },
+      {
+        "uid": "cuerpo",
+        "name": "Parte del Cuerpo",
+        "plural": "Partes del Cuerpo",
+        "description": ""
+      },
+      {
+        "uid": "enfermedad",
+        "name": "Enfermedad",
+        "plural": "Enfermedades",
+        "description": ""
+      },
+      {
+        "uid": "familia",
+        "name": "Familia",
+        "plural": "Familia",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "uid": "esto",
+    "name": "Diccionario Español-Totonaco",
+    "short_name": "Español > Totonaco",
+    "language1": {
+      "iso3": "spa",
+      "name": "Español",
+      "demonym": "Español",
+      "variant": {
+        "uid": "es_419",
+        "name": "Español de América Latina",
+        "demonym": "Español de América Latina",
+        "description": ""
+      },
+      "description": "",
+      "characters": [
+        "a",
+        "b",
+        "c",
+        "ch",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m",
+        "n",
+        "o",
+        "p",
+        "q",
+        "r",
+        "s",
+        "t",
+        "u",
+        "w",
+        "x",
+        "y",
+        "z"
+      ]
+    },
+    "language2": {
+      "iso3": "tos",
+      "name": "Totonaco",
+      "demonym": "Tutunakú",
+      "variant": {
+        "uid": "general",
+        "name": "General",
+        "description": ""
+      },
+      "description": "",
+      "characters": [
+        "a",
+        "ch",
+        "e",
+        "i",
+        "j",
+        "k",
+        "kg",
+        "l",
+        "lh",
+        "m",
+        "n",
+        "o",
+        "p",
+        "s",
+        "t",
+        "tl",
+        "ts",
+        "u",
+        "w",
+        "x",
+        "y"
+      ]
+    },
+    "entries": [],
+    "categories": [
+      {
+        "uid": "planta",
+        "name": "Planta",
+        "plural": "Plantas",
+        "description": ""
+      },
+      {
+        "uid": "animal",
+        "name": "Animal",
+        "plural": "Animales",
+        "description": ""
+      },
+      {
+        "uid": "alimento",
+        "name": "Alimento",
+        "plural": "Alimentos",
+        "description": ""
+      },
+      {
+        "uid": "color",
+        "name": "Color",
+        "plural": "Colores",
+        "description": ""
+      },
+      {
+        "uid": "cuerpo",
+        "name": "Parte del Cuerpo",
+        "plural": "Partes del Cuerpo",
+        "description": ""
+      },
+      {
+        "uid": "enfermedad",
+        "name": "Enfermedad",
+        "plural": "Enfermedades",
+        "description": ""
+      },
+      {
+        "uid": "familia",
+        "name": "Familia",
+        "plural": "Familia",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "uid": "toen",
+    "name": "Tutunakú-English Dictionary",
+    "short_name": "Tutunakú > English",
+    "language1": {
+      "iso3": "tos",
+      "name": "Totonaco",
+      "demonym": "Tutunakú",
+      "variant": {
+        "uid": "general",
+        "name": "General",
+        "description": ""
+      },
+      "description": "",
+      "characters": [
+        "a",
+        "ch",
+        "e",
+        "i",
+        "j",
+        "k",
+        "kg",
+        "l",
+        "lh",
+        "m",
+        "n",
+        "o",
+        "p",
+        "s",
+        "t",
+        "tl",
+        "ts",
+        "u",
+        "w",
+        "x",
+        "y"
+      ]
+    },
+    "language2": {
+      "iso3": "eng",
+      "name": "English",
+      "demonym": "English",
+      "variant": {
+        "uid": "en_US",
+        "name": "American English",
+        "demonym": "American English",
+        "description": ""
+      },
+      "description": "",
+      "characters": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m",
+        "n",
+        "o",
+        "p",
+        "q",
+        "r",
+        "s",
+        "t",
+        "u",
+        "v",
+        "w",
+        "x",
+        "y",
+        "z"
+      ]
+    },
+    "entries": [],
+    "categories": [
+      {
+        "uid": "plant",
+        "name": "Plant",
+        "plural": "Plants",
+        "description": ""
+      },
+      {
+        "uid": "animal",
+        "name": "Animal",
+        "plural": "Animals",
+        "description": ""
+      },
+      {
+        "uid": "food",
+        "name": "Food",
+        "plural": "Foods",
+        "description": ""
+      },
+      {
+        "uid": "color",
+        "name": "Color",
+        "plural": "Colors",
+        "description": ""
+      },
+      {
+        "uid": "body",
+        "name": "Body Part",
+        "plural": "Body Parts",
+        "description": ""
+      },
+      {
+        "uid": "illness",
+        "name": "Illness",
+        "plural": "Illnesses",
+        "description": ""
+      },
+      {
+        "uid": "family",
+        "name": "Family",
+        "plural": "Family",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "uid": "ento",
+    "name": "English-Tutunakú Dictionary",
+    "short_name": "English > Tutunakú",
+    "language1": {
+      "iso3": "eng",
+      "name": "English",
+      "demonym": "English",
+      "variant": {
+        "uid": "en_US",
+        "name": "American English",
+        "demonym": "American English",
+        "description": ""
+      },
+      "description": "",
+      "characters": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m",
+        "n",
+        "o",
+        "p",
+        "q",
+        "r",
+        "s",
+        "t",
+        "u",
+        "v",
+        "w",
+        "x",
+        "y",
+        "z"
+      ]
+    },
+    "language2": {
+      "iso3": "tos",
+      "name": "Totonaco",
+      "demonym": "Tutunakú",
+      "variant": {
+        "uid": "general",
+        "name": "General",
+        "description": ""
+      },
+      "description": "",
+      "characters": [
+        "a",
+        "ch",
+        "e",
+        "i",
+        "j",
+        "k",
+        "kg",
+        "l",
+        "lh",
+        "m",
+        "n",
+        "o",
+        "p",
+        "s",
+        "t",
+        "tl",
+        "ts",
+        "u",
+        "w",
+        "x",
+        "y"
+      ]
+    },
+    "entries": [],
+    "categories": [
+      {
+        "uid": "plant",
+        "name": "Plant",
+        "plural": "Plants",
+        "description": ""
+      },
+      {
+        "uid": "animal",
+        "name": "Animal",
+        "plural": "Animals",
+        "description": ""
+      },
+      {
+        "uid": "food",
+        "name": "Food",
+        "plural": "Foods",
+        "description": ""
+      },
+      {
+        "uid": "color",
+        "name": "Color",
+        "plural": "Colors",
+        "description": ""
+      },
+      {
+        "uid": "body",
+        "name": "Body Part",
+        "plural": "Body Parts",
+        "description": ""
+      },
+      {
+        "uid": "illness",
+        "name": "Illness",
+        "plural": "Illnesses",
+        "description": ""
+      },
+      {
+        "uid": "family",
+        "name": "Family",
+        "plural": "Family",
+        "description": ""
+      }
+    ]
+  }
+]

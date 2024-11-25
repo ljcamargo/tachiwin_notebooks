@@ -1,0 +1,30 @@
+buildscript {
+    dependencies {
+        classpath libs.agcp
+    }
+}
+
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.jvm) apply true
+    alias(libs.plugins.kotlin.serialization) apply true
+}
+
+subprojects {
+    afterEvaluate { project ->
+        if (project.plugins.hasPlugin('com.android.application') ||
+                project.plugins.hasPlugin('com.android.library')) {
+            if (project.hasProperty('huaweiFlavor') && project.huaweiFlavor) {
+                project.buildscript.dependencies {
+                    classpath libs.agcp
+                }
+                project.apply plugin: 'com.huawei.agconnect'
+                agcp {
+                    manifest false
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,12 @@
+{
+  "headers": [
+    "var",
+    "word",
+    "alias",
+    "phonetic",
+    "morfology",
+    "meaning",
+    "category"
+  ],
+  "rows": []
+}

@@ -1,0 +1,195 @@
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlin.serialization) apply true
+    //alias(libs.plugins.huawei.agconnect) apply false
+}
+
+afterEvaluate {
+    android.applicationVariants.all { variant ->
+        if (variant.productFlavors.any { it.name == "huawei" }) {
+            //apply plugin: alias(libs.plugins.huawei.agconnect)
+        }
+    }
+}
+
+tasks.whenTaskAdded { task ->
+    if (task.name == 'processDebugResources') {
+        task.dependsOn 'extractTranslations'
+    }
+}
+
+android {
+    compileSdk 35
+
+    Properties versionProps = new Properties()
+    def versionPropsFile = file('version.properties')
+    if (versionPropsFile.exists())
+        versionProps.load(new FileInputStream(versionPropsFile))
+    def code = (versionProps['VERSION_CODE'] ?: "0").toInteger() + 1
+    versionProps['VERSION_CODE'] = code.toString()
+    versionProps.store(versionPropsFile.newWriter(), null)
+
+    defaultConfig {
+        applicationId "org.tachiwin.tutunaku"
+        minSdk 24
+        targetSdk 35
+        versionCode code
+        versionName "1.0." + code
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+        ndk {
+            abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86_64'
+        }
+        externalNativeBuild {
+            cmake {
+                arguments("-DLLAMA_BUILD_COMMON=ON", "-DCMAKE_BUILD_TYPE=Release")
+                cppFlags("")
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+    buildFeatures {
+        compose true
+        buildConfig true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion libs.versions.kotlinCompiler.get()
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+        jniLibs {
+            pickFirsts += ['**/*.so']
+        }
+    }
+
+    flavorDimensions = ['platform', 'level']
+    namespace 'org.nehuatl.tachiwin'
+
+    productFlavors {
+        google {
+            dimension "platform"
+        }
+        huawei {
+            dimension "platform"
+            ext.useHuawei = true
+        }
+        dev {
+            dimension 'level'
+        }
+        prod {
+            dimension 'level'
+        }
+    }
+
+    applicationVariants.configureEach {
+        addJavaSourceFoldersToModel(layout.buildDirectory
+                .dir("generated/ksp/$name/kotlin").get().asFile)
+    }
+
+    tasks.register('extractTranslations') {
+        doLast {
+            def pythonScript = file("scripts/translation_extractor.py").absolutePath
+            def stringsXml = file("src/main/res/values/strings.xml").absolutePath
+            def translationsJson = file("src/main/assets/translations.json").absolutePath
+
+            // For Windows, use 'python' instead of 'python3'
+            def pythonCommand = 'python'
+            // Optional: You can specify full path to Python if needed
+            // def pythonCommand = 'C:\\Users\\YourUsername\\AppData\\Local\\Programs\\Python\\Python39\\python.exe'
+
+            exec {
+                workingDir project.projectDir
+                if (System.getProperty('os.name').toLowerCase().contains('windows')) {
+                    commandLine 'cmd', '/c', pythonCommand, pythonScript, stringsXml, translationsJson
+                } else {
+                    commandLine 'python3', pythonScript, stringsXml, translationsJson
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation libs.core.ktx
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.ui
+    implementation libs.ui.util
+    implementation libs.androidx.material
+    implementation libs.material3
+    implementation libs.androidx.ui.tooling.preview
+    implementation libs.androidx.lifecycle.runtime.ktx
+    implementation libs.androidx.activity.compose
+    implementation libs.koin.androidx.compose
+    implementation libs.androidx.navigation.compose
+    implementation libs.toolbar.compose
+    implementation libs.androidx.runtime.livedata
+    implementation libs.accompanist.navigation.animation
+    implementation libs.accompanist.systemuicontroller
+    implementation libs.androidx.constraintlayout.compose
+    implementation libs.accompanist.swiperefresh
+    implementation libs.androidx.fragment.ktx
+    implementation libs.androidx.room.runtime
+    annotationProcessor libs.androidx.room.compiler
+    implementation libs.destinations.core
+    ksp libs.ksp
+    implementation libs.kotlinx.serialization.json
+    implementation libs.kotlinx.datetime
+    implementation libs.fontawesomecompose
+    implementation libs.androidx.activity.ktx
+
+    //for HWS
+    huaweiImplementation libs.agconnect.core
+    huaweiImplementation libs.hianalytics
+
+    // ok http3 dependency
+    googleImplementation libs.okhttp
+
+    implementation libs.fuzzywuzzy
+    implementation libs.toolbar.compose
+    implementation libs.richtext.ui.material
+    implementation libs.richtext.commonmark
+
+    // AI
+    implementation libs.fbjni.java.only
+    implementation libs.nativeloader
+    implementation libs.llamacpp.kotlin
+
+    // REMOTE
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.cio)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.serialization.kotlinx.json)
+
+    //ADS
+    googleImplementation libs.play.services.ads
+
+
+    //TEST
+    testImplementation libs.junit
+    androidTestImplementation libs.koin.test
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
+    androidTestImplementation libs.androidx.ui.test.junit4
+    debugImplementation libs.androidx.ui.tooling
+}

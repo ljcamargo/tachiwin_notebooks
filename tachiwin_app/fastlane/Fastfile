@@ -1,0 +1,92 @@
+default_platform(:android)
+
+platform :android do
+  lane :testingGoogle do
+    changelog = prompt(text: "Changelog: ")
+    sh("find .. -type f -name '*.apk' -delete")
+    sh("find .. -type f -name '*.aab' -delete")
+    gradle(
+      task: "bundle",
+      flavor: "googleProd",
+      build_type: "Release",
+      properties: {
+        "android.injected.signing.store.file" => ENV['ANDROID_STORE_FILE'],
+        "android.injected.signing.store.password" => ENV['ANDROID_STORE_PSW'],
+        "android.injected.signing.key.alias" => ENV['ANDROID_KEY_ALIAS'],
+        "android.injected.signing.key.password" => ENV['ANDROID_KEY_PSW'],
+      }
+    )
+    copy_artifacts(
+        artifacts: [lane_context[SharedValues::GRADLE_AAB_OUTPUT_PATH]],
+        target_path: ENV['BITRISE_DEPLOY_DIR']
+    )
+    upload_to_play_store(
+        package_name: 'org.tachiwin.tutunaku',
+        release_status: 'draft',
+        track: 'alpha',
+        skip_upload_metadata: true,
+        skip_upload_images: true
+    )
+  end
+
+  lane :testingAPK do
+      changelog = prompt(text: "Changelog: ")
+      sh("find .. -type f -name '*.apk' -delete")
+      sh("find .. -type f -name '*.aab' -delete")
+      gradle(
+        task: "assemble",
+        flavor: "googleProd",
+        build_type: "Release",
+        properties: {
+          "android.injected.signing.store.file" => ENV['ANDROID_STORE_FILE'],
+          "android.injected.signing.store.password" => ENV['ANDROID_STORE_PSW'],
+          "android.injected.signing.key.alias" => ENV['ANDROID_KEY_ALIAS'],
+          "android.injected.signing.key.password" => ENV['ANDROID_KEY_PSW'],
+        }
+      )
+      copy_artifacts(
+          artifacts: [lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]],
+          target_path: ENV['BITRISE_DEPLOY_DIR']
+      )
+  end
+
+  lane :testingHuawei do
+    changelog = prompt(text: "Changelog: ")
+    sh("find .. -type f -name '*.apk' -delete")
+    sh("find .. -type f -name '*.aab' -delete")
+    gradle(
+      task: "bundle",
+      flavor: "huaweiProd",
+      build_type: "Release",
+      properties: {
+        "android.injected.signing.store.file" => ENV['ANDROID_STORE_FILE'],
+        "android.injected.signing.store.password" => ENV['ANDROID_STORE_PSW'],
+        "android.injected.signing.key.alias" => ENV['ANDROID_KEY_ALIAS'],
+        "android.injected.signing.key.password" => ENV['ANDROID_KEY_PSW'],
+      }
+    )
+    copy_artifacts(
+        artifacts: [lane_context[SharedValues::GRADLE_AAB_OUTPUT_PATH]],
+        target_path: ENV['BITRISE_DEPLOY_DIR']
+    )
+    huawei_appgallery_connect(
+      client_id: ENV['HUAWEI_APPGALLERY_CLIENT_ID'],
+      client_secret: ENV['HUAWEI_APPGALLERY_API_KEY'],
+      app_id: ENV['HUAWEI_APPGALLERY_APP_ID'],
+      apk_path: lane_context[SharedValues::GRADLE_AAB_OUTPUT_PATH],
+      is_aab: true,
+      submit_for_review: false,
+      #privacy_policy_url: "https://example.com",
+      #changelog_path: "<PATH_TO_CHANGELOG_FILE>",
+      # release time to release app on specific date
+      #release_time: "2019-12-25T07:05:15+0000",
+      # For phase wise release: set these parameters
+      #phase_wise_release: true,
+      #phase_release_start_time: "2019-12-25T07:05:15+0000",
+      #phase_release_end_time: "2019-12-28T07:05:15+0000",
+      #phase_release_percent: "10.00",
+      #phase_release_description: "<DESCRIPTION>"
+    )
+  end
+
+end

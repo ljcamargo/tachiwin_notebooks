@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "org.tachiwin.tutunaku",
+  "variantName": "huaweiProdRelease",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 677,
+      "versionName": "1.0.677",
+      "outputFile": "app-huawei-prod-release.apk"
+    }
+  ],
+  "elementType": "File"
+}

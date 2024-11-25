@@ -1,0 +1,39 @@
+package org.nehuatl.tachiwin.agnostic
+
+import android.content.Context
+import com.huawei.hms.ads.AdParam
+import com.huawei.hms.ads.BannerAdSize
+import com.huawei.hms.ads.banner.BannerView
+
+class AgnosticAdView(
+    private val context: Context,
+    private val adSize: AgnosticAdSize,
+    private val adUnit: String,
+) {
+
+    private val builder = AdParam.Builder().build()
+
+    fun getAd(): BannerView = when (adSize) {
+        AgnosticAdSize.BANNER -> BannerView(context).apply {
+            adId = adUnit
+            bannerAdSize = BannerAdSize.BANNER_SIZE_SMART
+            loadAd(builder)
+        }
+        else -> BannerView(context).apply {
+            adId = adUnit
+            loadAd(builder)
+        }
+    }
+
+    enum class AgnosticAdSize {
+        BANNER,
+        FULL_BANNER,
+        LARGE_BANNER,
+        LEADERBOARD,
+        MEDIUM_RECTANGLE,
+        WIDE_SKYSCRAPER,
+        FLUID,
+        INVALID,
+        SEARCH;
+    }
+}

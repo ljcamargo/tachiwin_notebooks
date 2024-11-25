@@ -1,0 +1,137 @@
+format_version: "11"
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: android
+app:
+  envs:
+    - FASTLANE_XCODE_LIST_TIMEOUT: "120"
+    - opts:
+        is_expand: false
+      FASTLANE_WORK_DIR: .
+    - opts:
+        is_expand: false
+      FASTLANE_LANE: android google
+trigger_map:
+  - push_branch: release_google
+    workflow: google
+  - push_branch: release_apk
+    workflow: apk
+  - push_branch: release_huawei
+    workflow: huawei
+workflows:
+  apk:
+    steps:
+      - set-java-version@1:
+          inputs:
+            - set_java_version: "17"
+      - activate-ssh-key@4:
+          run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+      - git-clone@6: {}
+      - file-downloader@1:
+          inputs:
+            - destination: $BITRISE_SOURCE_DIR/keystore.keystore
+            - source: $BITRISEIO_ANDROID_KEYSTORE_URL
+      - file-downloader@1:
+          inputs:
+            - destination: $BITRISE_SOURCE_DIR/google_play.json
+            - source: $BITRISEIO_GOOGLE_PLAY_CREDENTIALS_URL
+      - script@1:
+          title: Activate env vars for signing
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -e
+                set -x
+                envman add --key ANDROID_STORE_FILE --value "$BITRISE_SOURCE_DIR/keystore.keystore"
+                envman add --key ANDROID_STORE_PSW --value "$BITRISEIO_ANDROID_KEYSTORE_PASSWORD"
+                envman add --key ANDROID_KEY_ALIAS --value "$BITRISEIO_ANDROID_KEYSTORE_ALIAS"
+                envman add --key ANDROID_KEY_PSW --value "$BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD"
+                source "$BITRISE_SOURCE_DIR/app/version.properties"
+                echo "$VERSION_CODE" | envman add --key VERSION_CODE
+      - fastlane@3:
+          inputs:
+            - lane: $FASTLANE_LANE
+            - work_dir: $FASTLANE_WORK_DIR
+      - deploy-to-bitrise-io@2:
+          inputs:
+            - notify_email_list: $NOTIFY_EMAILS
+    envs:
+      - opts:
+          is_expand: false
+        FASTLANE_LANE: testingAPK
+  google:
+    steps:
+      - set-java-version@1:
+          inputs:
+            - set_java_version: "17"
+      - activate-ssh-key@4:
+          run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+      - git-clone@6: {}
+      - file-downloader@1:
+          inputs:
+            - destination: $BITRISE_SOURCE_DIR/keystore.keystore
+            - source: $BITRISEIO_ANDROID_KEYSTORE_URL
+      - file-downloader@1:
+          inputs:
+            - destination: $BITRISE_SOURCE_DIR/google_play.json
+            - source: $BITRISEIO_GOOGLE_PLAY_CREDENTIALS_URL
+      - script@1:
+          title: Activate env vars for signing
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -e
+                set -x
+                envman add --key ANDROID_STORE_FILE --value "$BITRISE_SOURCE_DIR/keystore.keystore"
+                envman add --key ANDROID_STORE_PSW --value "$BITRISEIO_ANDROID_KEYSTORE_PASSWORD"
+                envman add --key ANDROID_KEY_ALIAS --value "$BITRISEIO_ANDROID_KEYSTORE_ALIAS"
+                envman add --key ANDROID_KEY_PSW --value "$BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD"
+                source "$BITRISE_SOURCE_DIR/app/version.properties"
+                echo "$VERSION_CODE" | envman add --key VERSION_CODE
+      - fastlane@3:
+          inputs:
+            - lane: $FASTLANE_LANE
+            - work_dir: $FASTLANE_WORK_DIR
+      - deploy-to-bitrise-io@2:
+          inputs:
+            - notify_email_list: $NOTIFY_EMAILS
+    envs:
+      - opts:
+          is_expand: false
+        FASTLANE_LANE: testingGoogle
+  huawei:
+    steps:
+      - activate-ssh-key@4:
+          run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+      - git-clone@6: {}
+      - file-downloader@1:
+          inputs:
+            - destination: $BITRISE_SOURCE_DIR/keystore.keystore
+            - source: $BITRISEIO_ANDROID_KEYSTORE_URL
+      - script@1:
+          title: Activate env vars for signing
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -e
+                set -x
+                envman add --key ANDROID_STORE_FILE --value "$BITRISE_SOURCE_DIR/keystore.keystore"
+                envman add --key ANDROID_STORE_PSW --value "$BITRISEIO_ANDROID_KEYSTORE_PASSWORD"
+                envman add --key ANDROID_KEY_ALIAS --value "$BITRISEIO_ANDROID_KEYSTORE_ALIAS"
+                envman add --key ANDROID_KEY_PSW --value "$BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD"
+                source "$BITRISE_SOURCE_DIR/app/version.properties"
+                echo "$VERSION_CODE" | envman add --key VERSION_CODE
+      - fastlane@3:
+          inputs:
+            - lane: $FASTLANE_LANE
+            - work_dir: $FASTLANE_WORK_DIR
+      - deploy-to-bitrise-io@2:
+          inputs:
+            - notify_email_list: $NOTIFY_EMAILS
+    envs:
+      - opts:
+          is_expand: false
+        FASTLANE_LANE: testingHuawei
+meta:
+  bitrise.io:
+    stack: linux-docker-android-20.04
+    machine_type_id: standard
